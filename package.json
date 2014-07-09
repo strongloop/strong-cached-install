@@ -1,0 +1,33 @@
+{
+  "name": "strong-cached-install",
+  "version": "1.0.0",
+  "description": "Speed up `npm install` in unit-tests by using a cache on subsequent runs.",
+  "main": "index.js",
+  "scripts": {
+    "pretest": "jshint .",
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/strongloop/strong-cached-install.git"
+  },
+  "keywords": [
+    "fast",
+    "npm",
+    "install",
+    "cache",
+    "test"
+  ],
+  "author": "Miroslav Bajtos <miroslav@strongloop.com>",
+  "license": {
+    "name": "Dual Artistic-2.0/StrongLoop",
+    "url": "https://github.com/strongloop/strong-cached-install/blob/master/LICENSE"
+  },
+  "bugs": {
+    "url": "https://github.com/strongloop/strong-cached-install/issues"
+  },
+  "homepage": "https://github.com/strongloop/strong-cached-install",
+  "devDependencies": {
+    "mocha": "^1.20.1"
+  }
+}
