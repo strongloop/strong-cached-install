@@ -9,6 +9,9 @@ var SANDBOX = path.resolve(__dirname, 'sandbox');
 var CACHE = path.resolve(__dirname, '.pkgcache');
 
 describe('cached install', function() {
+  // Increase the timeout to accomodate for slow `npm install`
+  this.timeout(120*1000);
+
   beforeEach(resetCacheSync);
   beforeEach(resetSandboxSync);
 
