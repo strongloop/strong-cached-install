@@ -17,3 +17,5 @@ npm-debug.log
 strong-cached-install-*.tgz
 coverage.html
 node_modules
+/test/sandbox/
+/test/.pkgcache/
