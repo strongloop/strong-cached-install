@@ -1,7 +1,6 @@
-# strong-cached-install
+# strong-cached-install [![Build Status](https://travis-ci.org/strongloop/strong-cached-install.png?branch=master)](https://travis-ci.org/strongloop/strong-cached-install)
 
-[![Build Status](https://travis-ci.org/strongloop/strong-cached-install.png?branch=master)](https://travis-ci.org/strongloop/strong-cached-install)
-[![NPM version](https://badge.fury.io/js/strong-cached-install.png)](http://badge.fury.io/js/strong-cached-install)
+[![NPM badge](https://nodei.co/npm/strong-cached-install.png?downloads=true)](https://npmjs.org/package/strong-cached-install.png)
 
 ## Overview
 
