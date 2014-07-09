@@ -5,19 +5,42 @@ var fs = require('fs-extra');
 var ncp = require('ncp');
 var path = require('path');
 
-module.exports = function install(appDir, cacheDir, cb) {
+/**
+ * Install dependencies of the package in `appDir` directory.
+ * @param {string} appDir Application's root directory.
+ * @param {string} cacheDir Directory where to keep cached files.
+ * @param {Array<string>=} depTypes Optiona list of dependency types to install,
+ * e.g. `['dependencies', 'devDependencies']`. Defaults to `['dependencies']`.
+ * @param {function(Error=)} cb The callback.
+ */
+module.exports = function install(appDir, cacheDir, depTypes, cb) {
+  if (typeof depTypes === 'function' && cb === undefined) {
+    cb = depTypes;
+    depTypes = ['dependencies'];
+  }
+
   fs.readJsonFile(
     path.resolve(appDir, 'package.json'),
     function installFromPackageJson(err, pkg) {
       if (err) return cb(err);
 
+      var deps = [];
+      depTypes.forEach(function(dt) {
+        deps = deps.concat(toKeyValuePairs(pkg[dt]));
+      });
+
       async.eachSeries(
-        Object.keys(pkg.dependencies),
+        deps,
         function installDependency(dep, next) {
-          installPackage(appDir, cacheDir, dep, pkg.dependencies[dep], next);
+          installPackage(appDir, cacheDir, dep[0], dep[1], next);
         },
         cb);
     });
+
+  function toKeyValuePairs(map) {
+    return Object.keys(map || {})
+      .map(function(key) { return [key, map[key]]; });
+  }
 };
 
 function installPackage(appDir, cacheDir, name, version, cb) {

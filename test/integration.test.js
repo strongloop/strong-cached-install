@@ -57,17 +57,30 @@ describe('cached install', function() {
     });
   });
 
-  function givenPackageWithDebugDependency(version) {
-    fs.writeJsonFileSync(
-      path.resolve(SANDBOX, 'package.json'),
-      {
-        dependencies: {
-          debug: version
-        }
+  it('supports dev dependencies', function(done) {
+    givenPackage({
+      devDependencies: {
+        debug: '0.8.0'
       }
-    );
+    });
+    install(SANDBOX, CACHE, ['devDependencies'], function(err) {
+      if (err) return done(err);
+      expectDebugVersionInstalled('0.8.0');
+      done();
+    });
+  });
+
+  function givenPackageWithDebugDependency(version) {
+    givenPackage({
+      dependencies: {
+        debug: version
+      }
+    });
   }
 
+  function givenPackage(packageJson) {
+    fs.writeJsonFileSync(path.resolve(SANDBOX, 'package.json'), packageJson);
+  }
   function expectDebugVersionInstalled(expectedVersion) {
     var pkgPath = path.join(SANDBOX, 'node_modules', 'debug', 'package.json');
     expect(fs.existsSync(pkgPath), 'node_modules/debug/package.json exists')
