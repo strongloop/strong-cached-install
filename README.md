@@ -22,9 +22,9 @@ var install = require('strong-cached-install');
 
 describe('my yo generator', function() {
   before(resetSandbox);
-  before(runGenerator);
+  before(runGeneratorInSandbox);
 
-  before(function(done) {
+  before(function installDependencies(done) {
     var appDir = SANDBOX;
     var cacheDir = path.resolve(__dirname, '.pkgcache');
     install(appDir, cacheDir, done);
