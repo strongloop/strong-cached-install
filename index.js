@@ -77,7 +77,7 @@ function execNpmInstall(what, cwd, cb) {
     },
   };
 
-  var command = 'npm install ' + what;
+  var command = 'npm install --spin=false ' + what;
   debug(command);
   return exec(command, options, function(err, stdout, stderr) {
     debug('--npm install stdout--\n%s\n--npm install stderr--\n%s\n--end--',
