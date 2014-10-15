@@ -52,7 +52,11 @@ function installPackage(appDir, cacheDir, name, version, cb) {
     if (exists) {
       debug('installing package %s@%s from cache', name, version);
       fs.mkdirsSync(dest);
-      ncp(cachePath, dest, cb);
+      ncp(cachePath, dest, function(err) {
+        if (err) return cb(err);
+        debug('running npm build for %s@%s', name, version);
+        execNpmCommand('build .', dest, cb);
+      });
       return;
     }
 
@@ -68,6 +72,10 @@ function installPackage(appDir, cacheDir, name, version, cb) {
 }
 
 function execNpmInstall(what, cwd, cb) {
+  execNpmCommand('install --spin=false ' + what, cwd, cb);
+}
+
+function execNpmCommand(commandWithArgs, cwd, cb) {
   var options = {
     cwd: cwd,
     env: {
@@ -77,11 +85,12 @@ function execNpmInstall(what, cwd, cb) {
     },
   };
 
-  var command = 'npm install --spin=false ' + what;
-  debug(command);
-  return exec(command, options, function(err, stdout, stderr) {
-    debug('--npm install stdout--\n%s\n--npm install stderr--\n%s\n--end--',
+  var script = 'npm ' + commandWithArgs;
+  debug(script);
+  return exec(script, options, function(err, stdout, stderr) {
+    debug('--npm stdout--\n%s\n--npm stderr--\n%s\n--end--',
       stdout, stderr);
     cb(err, stdout, stderr);
   });
+
 }
