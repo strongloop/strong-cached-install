@@ -1,4 +1,4 @@
-strong-cluster-connect-store uses a dual license model.
+strong-cached-install uses a dual license model.
 
 You may use this library under the terms of the [Artistic 2.0 license][],
 or under the terms of the [StrongLoop Subscription Agreement][].

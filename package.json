@@ -19,10 +19,7 @@
     "test"
   ],
   "author": "Miroslav Bajtos <miroslav@strongloop.com>",
-  "license": {
-    "name": "Dual Artistic-2.0/StrongLoop",
-    "url": "https://github.com/strongloop/strong-cached-install/blob/master/LICENSE"
-  },
+  "license": "Artistic-2.0",
   "bugs": {
     "url": "https://github.com/strongloop/strong-cached-install/issues"
   },
