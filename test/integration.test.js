@@ -35,9 +35,9 @@ describe('cached install', function() {
 
       // modify the cached package.json
       var cachedPkgPath = path.resolve(CACHE, 'debug', '0.8.0', 'package.json');
-      var pkg = fs.readJsonFileSync(cachedPkgPath);
+      var pkg = fs.readJsonSync(cachedPkgPath);
       pkg.version = pkg.version + '+mod';
-      fs.writeJsonFileSync(cachedPkgPath, pkg);
+      fs.writeJsonSync(cachedPkgPath, pkg);
 
       resetSandboxSync();
       givenPackageWithDebugDependency('0.8.0');
@@ -125,14 +125,14 @@ describe('cached install', function() {
   }
 
   function givenPackage(packageJson) {
-    fs.writeJsonFileSync(path.resolve(SANDBOX, 'package.json'), packageJson);
+    fs.writeJsonSync(path.resolve(SANDBOX, 'package.json'), packageJson);
   }
   function expectDebugVersionInstalled(expectedVersion) {
     var pkgPath = path.join(SANDBOX, 'node_modules', 'debug', 'package.json');
     expect(fs.existsSync(pkgPath), 'node_modules/debug/package.json exists')
       .to.equal(true);
 
-    var pkg = fs.readJsonFileSync(pkgPath);
+    var pkg = fs.readJsonSync(pkgPath);
     expect(pkg.version, 'debug version').to.equal(expectedVersion);
   }
 
