@@ -1,3 +1,13 @@
+2015-12-03, Version 2.0.1
+=========================
+
+ * Upgrade dependencies to the latest versions (Miroslav Bajtoš)
+
+ * Refer to licenses with a link (Sam Roberts)
+
+ * Use strongloop conventions for licensing (Sam Roberts)
+
+
 2015-02-24, Version 2.0.0
 =========================
 
