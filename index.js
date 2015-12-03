@@ -19,7 +19,7 @@ module.exports = function install(appDir, cacheDir, depTypes, cb) {
     depTypes = ['dependencies'];
   }
 
-  fs.readJsonFile(
+  fs.readJson(
     path.resolve(appDir, 'package.json'),
     function installFromPackageJson(err, pkg) {
       if (err) return cb(err);
