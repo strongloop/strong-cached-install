@@ -72,7 +72,7 @@ function installPackage(appDir, cacheDir, name, version, cb) {
 }
 
 function execNpmInstall(what, cwd, cb) {
-  execNpmCommand('install --spin=false ' + what, cwd, cb);
+  execNpmCommand('install --spin=false --global-style ' + what, cwd, cb);
 }
 
 function execNpmCommand(commandWithArgs, cwd, cb) {
