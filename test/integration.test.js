@@ -2,7 +2,6 @@
 var exec = require('child_process').exec;
 var fs = require('fs-extra');
 var path = require('path');
-var which = require('which');
 var install = require('../');
 
 var debug = require('debug')('test');
@@ -51,19 +50,21 @@ describe('cached install', function() {
 
   it('creates .bin links when installing from cache', function(done) {
     // This test needs to install a package that is not already in PATH
-    // mkdirp is a good candidate, let's verify it's not already there
+    // cowsay is a good candidate, let's verify it's not already there
     try {
-      var mkdirpPath = which.sync('mkdirp');
-      return done(new Error('mkdir is already installed in ' + mkdirpPath));
+      var cowsayPath = path.resolve(SANDBOX, 'node_modules', '.bin', 'cowsay');
+      if (fs.accessSync(cowsayPath) || fs.accessSync(cowsayPath + '.cmd')) {
+        return done(new Error('mkdir is already installed in ' + cowsayPath));
+      }
     } catch(err) {
     }
 
     var packageJson = {
       scripts: {
-        test: 'mkdirp tested'
+        test: './node_modules/.bin/cowsay tested'
       },
       dependencies: {
-        mkdirp: '0.5.0'
+        cowsay: '1.1.2'
       }
     };
 
@@ -73,10 +74,10 @@ describe('cached install', function() {
       resetSandboxSync();
       givenPackage(packageJson);
 
-      // Install mkdirp from the cache
+      // Install cowsay from the cache
       install(SANDBOX, CACHE, function(err) {
         if (err) return done(err);
-        // Verify that `npm test` can call `mkdirp` in SANDBOX
+        // Verify that `npm test` can call `cowsay` in SANDBOX
         debug('executing `npm test`');
 
         exec('npm test', { cwd: SANDBOX }, function(err, stdout, stderr) {
