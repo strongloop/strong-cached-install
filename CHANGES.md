@@ -1,3 +1,9 @@
+2015-12-07, Version 2.0.2
+=========================
+
+ * fix missing dependencies under npm@3 (Ryan Graham)
+
+
 2015-12-03, Version 2.0.1
 =========================
 
