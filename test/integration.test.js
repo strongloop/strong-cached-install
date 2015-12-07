@@ -54,7 +54,7 @@ describe('cached install', function() {
     try {
       var cowsayPath = path.resolve(SANDBOX, 'node_modules', '.bin', 'cowsay');
       if (fs.accessSync(cowsayPath) || fs.accessSync(cowsayPath + '.cmd')) {
-        return done(new Error('mkdir is already installed in ' + cowsayPath));
+        return done(new Error('cowsay is already installed in ' + cowsayPath));
       }
     } catch(err) {
     }
