@@ -1,3 +1,11 @@
+2016-05-06, Version 2.0.3
+=========================
+
+ * update copyright notices and license (Ryan Graham)
+
+ * test: fix missed reference to mkdir (Ryan Graham)
+
+
 2015-12-07, Version 2.0.2
 =========================
 
