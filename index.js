@@ -81,13 +81,10 @@ function execNpmInstall(what, cwd, cb) {
 }
 
 function execNpmCommand(commandWithArgs, cwd, cb) {
+  debug('NPM ENV', process.env);
+
   var options = {
     cwd: cwd,
-    env: {
-      PATH: process.env.PATH,
-      HOME: process.env.HOME,
-      USERPROFILE: process.env.USERPROFILE,
-    },
   };
 
   var script = 'npm ' + commandWithArgs;
