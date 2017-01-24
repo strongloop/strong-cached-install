@@ -8,6 +8,7 @@ var exec = require('child_process').exec;
 var fs = require('fs-extra');
 var path = require('path');
 var install = require('../');
+var semver = require('semver');
 
 var debug = require('debug')('test');
 
@@ -122,6 +123,17 @@ describe('cached install', function() {
     });
   });
 
+  it('install latest version matching ^ operator', function(done) {
+    install.package(SANDBOX, CACHE, 'debug', '^1.0.0', function(err) {
+      if (err) return done(err);
+      var actualVersion = getDebugVersionInstalled();
+      // request a higher semver here than we requested above,
+      // this is to to ensure 1.0.x (or later) was installed
+      expect(semver.satisfies(actualVersion, '^1.0.1')).to.equal(true);
+      done();
+    });
+  });
+
   function givenPackageWithDebugDependency(version) {
     givenPackage({
       dependencies: {
@@ -133,18 +145,31 @@ describe('cached install', function() {
   function givenPackage(packageJson) {
     fs.writeJsonSync(path.resolve(SANDBOX, 'package.json'), packageJson);
   }
-  function expectDebugVersionInstalled(expectedVersion) {
+
+  function getDebugVersionInstalled() {
     var pkgPath = path.join(SANDBOX, 'node_modules', 'debug', 'package.json');
     expect(fs.existsSync(pkgPath), 'node_modules/debug/package.json exists')
       .to.equal(true);
 
     var pkg = fs.readJsonSync(pkgPath);
-    expect(pkg.version, 'debug version').to.equal(expectedVersion);
+    return pkg.version;
+  }
+
+  function expectDebugVersionInstalled(expectedVersion) {
+    var actualVersion = getDebugVersionInstalled();
+    expect(actualVersion, 'debug version').to.equal(expectedVersion);
   }
 
   function resetSandboxSync() {
     fs.removeSync(SANDBOX);
     fs.mkdirsSync(SANDBOX);
+
+    // Create a dummy package.json to forbid npm from looking up
+    // dependencies of strong-cached-install and skipping the actual
+    // installation
+    fs.writeJsonSync(
+      path.join(SANDBOX, 'package.json'),
+      {name: 'sandbox'});
   }
 
   function resetCacheSync() {

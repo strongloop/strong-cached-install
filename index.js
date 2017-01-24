@@ -48,6 +48,16 @@ module.exports = function install(appDir, cacheDir, depTypes, cb) {
   }
 };
 
+module.exports.package = installPackage;
+
+/**
+ * Install a single package with a given version.
+ * @param {string} appDir Application's root directory.
+ * @param {string} cacheDir Directory where to keep cached files.
+ * @param {string} name Package name, e.g. "loopback"
+ * @param {string} version Version specifier, e.g. "2.5.0" or "^2.6.5"
+ * @param {function(Error=)} cb The callback.
+ */
 function installPackage(appDir, cacheDir, name, version, cb) {
   var quotedVersion = version.replace(/^\^/, 'caret-').replace(/^~/, 'tilde-');
   var cachePath = path.join(cacheDir, name, quotedVersion);
@@ -88,6 +98,13 @@ function execNpmCommand(commandWithArgs, cwd, cb) {
   };
 
   var script = 'npm ' + commandWithArgs;
+  if (/^win/.test(process.platform)) {
+    // On Windows, "^" is a reserved character that must be escaped as "^^"
+    // Strangely enough, we need to escape it twice, as if there were
+    // two CMD shells invoked under the hood
+    script = script.replace('^', '^^^^');
+  }
+
   debug(script);
   return exec(script, options, function(err, stdout, stderr) {
     debug('--npm stdout--\n%s\n--npm stderr--\n%s\n--end--',
