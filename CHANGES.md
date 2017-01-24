@@ -1,3 +1,11 @@
+2017-01-24, Version 2.0.4
+=========================
+
+ * Pass all ENV to `npm` (fix for Windows) (Miroslav Bajtoš)
+
+ * Update URLs in CONTRIBUTING.md (#8) (Ryan Graham)
+
+
 2016-05-06, Version 2.0.3
 =========================
 

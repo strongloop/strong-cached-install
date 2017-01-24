@@ -1,6 +1,6 @@
 {
   "name": "strong-cached-install",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "description": "Speed up `npm install` in unit-tests by using a cache on subsequent runs.",
   "main": "index.js",
   "scripts": {
