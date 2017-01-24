@@ -1,3 +1,11 @@
+2017-01-24, Version 2.0.5
+=========================
+
+ * Fix installation of ^x.y.z version on Windows (Miroslav Bajtoš)
+
+ * Fix Node versions in .travis.yml (Miroslav Bajtoš)
+
+
 2017-01-24, Version 2.0.4
 =========================
 
