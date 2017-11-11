@@ -1,4 +1,4 @@
-Copyright (c) IBM Corp. 2014,2015. All Rights Reserved.
+Copyright (c) IBM Corp. 2014,2017. All Rights Reserved.
 Node module: strong-cached-install
 This project is licensed under the Artistic License 2.0, full text below.
 
