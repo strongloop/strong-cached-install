@@ -1,4 +1,4 @@
-// Copyright IBM Corp. 2014,2015. All Rights Reserved.
+// Copyright IBM Corp. 2014,2017. All Rights Reserved.
 // Node module: strong-cached-install
 // This file is licensed under the Artistic License 2.0.
 // License text available at https://opensource.org/licenses/Artistic-2.0
