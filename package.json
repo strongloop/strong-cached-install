@@ -18,7 +18,7 @@
     "cache",
     "test"
   ],
-  "author": "Miroslav Bajtos <miroslav@strongloop.com>",
+  "author": "IBM Corp.",
   "license": "Artistic-2.0",
   "bugs": {
     "url": "https://github.com/strongloop/strong-cached-install/issues"
